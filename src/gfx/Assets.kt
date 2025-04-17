@@ -2,26 +2,35 @@ package gfx
 
 import errors.ImageException
 import java.awt.Image
+import java.awt.image.BufferedImage
 import java.io.File
-import javax.swing.ImageIcon
+import javax.imageio.ImageIO
 
-class Assets {
-    val loaded: MutableMap<String, Image> = mutableMapOf()
+open class Assets {
+    private val loaded: MutableMap<String, BufferedImage> = mutableMapOf()
 
     private val assetsFolder: String
         get() {
-            return File("assets").absolutePath
+            return "./assets"
         }
 
-    fun loadImage(assetPath: String) {
-        val absolutePath = "$assetsFolder/$assetPath"
-        val file = File(absolutePath)
+    fun getImage(name: String): Image? {
+        return loaded[name]
+    }
 
-        if (!file.exists() && !file.isFile()) {
-            throw ImageException(absolutePath)
+    fun loadImage(imagePath: String): BufferedImage {
+        val file = File("$assetsFolder/$imagePath")
+        val image: BufferedImage
+
+        try {
+            image = ImageIO.read(file)
+        } catch (_: Exception) {
+            throw ImageException(imagePath)
         }
 
         val fileName: String = file.nameWithoutExtension
-        loaded[fileName] = ImageIcon(javaClass.getResource(file.path)).image
+        loaded[fileName] = image
+
+        return image
     }
 }
