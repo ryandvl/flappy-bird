@@ -1,10 +1,12 @@
-# Flappy Bird
-
-Flappy Bird game made with **JFrame** in **Kotlin**.
-
-This is a simple **Game Project** to my portfolio, I learned the basics of JFrame and improved my Kotlin skills.
+<h1 align="center">Flappy Bird</h1>
 
 <p align="center">
+  Flappy Bird game made with <strong>JFrame</strong> in <strong>Kotlin</strong>.
+  <br>
+  This is a simple <strong>Game Project</strong> to my portfolio, I learned the basics of JFrame and improved my Kotlin skills.
+
+  <br>
+
   <img alt="welcome image" src="./.github/assets/welcome.png">
   <img alt="in game image" src="./.github/assets/in-game.png">
   <img alt="game over image" src="./.github/assets/game-over.png">
