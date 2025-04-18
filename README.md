@@ -2,23 +2,24 @@
 
 <p align="center">
   Flappy Bird game made with <strong>JFrame</strong> in <strong>Kotlin</strong>.
-  <br>
+  <br/>
   This is a simple <strong>Game Project</strong> to my portfolio, I learned the basics of JFrame and improved my Kotlin skills.
 
-  <br>
+  <br/>
+  <br/>
 
   <img alt="welcome image" src="./.github/assets/welcome.png">
   <img alt="in game image" src="./.github/assets/in-game.png">
   <img alt="game over image" src="./.github/assets/game-over.png">
 </p>
 
-<br>
+<br/>
 
 > Based on: [Code Flappy Bird in Java - Kenny Yip Coding](https://www.youtube.com/watch?v=Xw2MEG-FBsE)
 >
 > But in **Kotlin** and in my style of coding.
 
-<br>
+<br/>
 
 [![Version](https://img.shields.io/badge/version-Finished-blue.svg)](https://shields.io)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
@@ -49,7 +50,7 @@ The `.jar` file is available on Releases.
 - Download the `.jar` file and place it in any folder;
 - Done! Just open the file and play it.
 
-<br>
+<br/>
 
 Or you can download the source code and build.
 
