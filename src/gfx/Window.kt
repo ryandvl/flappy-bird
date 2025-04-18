@@ -6,7 +6,8 @@ import game.Game
 import gfx.components.RoundedPanel
 import java.awt.BorderLayout
 import java.awt.Dimension
-import java.awt.Graphics
+import java.awt.Graphics2D
+import javax.swing.ImageIcon
 import javax.swing.JFrame
 import javax.swing.border.EmptyBorder
 
@@ -16,14 +17,17 @@ class Window(private val game: Game, size: Dimension) : JFrame() {
     var initialY: Int = 0
 
     init {
+        iconImage = assets.resizeImageIcon(
+            ImageIcon("${assets.assetsFolder}/images/bird.png"),
+            128,
+            128
+        ).image
+
         isResizable = false
         defaultCloseOperation = EXIT_ON_CLOSE
         isUndecorated = true
         layout = BorderLayout()
         isFocusable = true
-
-        assets.registerFont("fonts/Roboto-Bold.ttf", 14f) // Title
-
         this.size = size
 
         background = BACKGROUND_TRANSPARENT
@@ -46,7 +50,7 @@ class Window(private val game: Game, size: Dimension) : JFrame() {
         isVisible = true
     }
 
-    fun render(graphics: Graphics) {
+    fun render(graphics: Graphics2D) {
         // Background
         graphics.drawImage(assets.getImage("background"), 0, 0, size.width, size.height, null)
 
@@ -57,5 +61,7 @@ class Window(private val game: Game, size: Dimension) : JFrame() {
         for (pipe in game.pipes) {
             pipe.render(graphics)
         }
+
+        // Score
     }
 }

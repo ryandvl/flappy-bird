@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 
 class Movement(private val game: Game, private val bird: Bird) : KeyListener {
-    private val velocity = Vector2D(-4, 0)
+    val velocity = Vector2D(-4, 0)
     private val gravity: Int = 1
 
     fun move() {
@@ -14,31 +14,43 @@ class Movement(private val game: Game, private val bird: Bird) : KeyListener {
         bird.position.add(deltaY = velocity.y)
 
         for (pipe in game.pipes) {
-            pipe.position.add(deltaX = velocity.x)
+            pipe.move(velocity.x)
+
+            if (!pipe.passed && bird.position.x > pipe.x + pipe.size.width) {
+                pipe.passed = true
+                if (game.score >= Long.MAX_VALUE) {
+                    return game.over()
+                }
+                game.score++
+            }
 
             if (checkCollision(bird, pipe))
-                game.state = GameState.OVER
+                game.over()
         }
 
         if (bird.position.y > BOARD_SIZE.height)
-            game.state = GameState.OVER
+            game.over()
     }
 
-    fun checkCollision(bird: Bird, pipe: Pipe): Boolean {
+    private fun checkCollision(bird: Bird, pipe: Pipe): Boolean {
         val aX = bird.position.x
         val aY = bird.position.y
         val aW = bird.size.width
         val aH = bird.size.height
 
-        val bX = pipe.position.x
-        val bY = pipe.position.y
         val bW = pipe.size.width
         val bH = pipe.size.height
+        val bX = pipe.x
+
+        val bTY = pipe.topPosition.y
+        val bBY = pipe.bottomPosition.y
 
         return aX < bX + bW &&
                 aX + aW > bX &&
-                aY < bY + bH &&
-                aY + aH > bY
+                (aY < bTY + bH &&
+                        aY + aH > bTY ||
+                        aY < bBY + bH &&
+                        aY + aH > bBY)
     }
 
     override fun keyPressed(e: KeyEvent) {

@@ -1,28 +1,29 @@
 package game
 
+import PIPE_SIZE
 import dto.Position
-import java.awt.Dimension
 import java.awt.Graphics
 import java.awt.image.BufferedImage
 
-enum class PipeType {
-    TOP,
-    BOTTOM
-}
+class Pipe(game: Game) {
+    val topPosition = Position(game.size.width, 0)
+    val bottomPosition = Position(game.size.width, 0)
+    var x: Int = game.size.width
 
-class Pipe(game: Game, private val type: PipeType) {
-    val position = Position(game.size.width, 0)
-    val size = Dimension(64, 512)
+    private val topImage: BufferedImage = game.assets.getImage("top_pipe")!!
+    private val bottomImage: BufferedImage = game.assets.getImage("bottom_pipe")!!
+
+    val size = PIPE_SIZE
     var passed: Boolean = false
 
-    private val image: BufferedImage = game.assets.getImage(
-        when (type) {
-            PipeType.TOP -> "top_pipe"
-            PipeType.BOTTOM -> "bottom_pipe"
-        }
-    )!!
+    fun move(velocityX: Int) {
+        topPosition.add(deltaX = velocityX)
+        bottomPosition.add(deltaX = velocityX)
+        x = topPosition.x
+    }
 
     fun render(graphics: Graphics) {
-        graphics.drawImage(image, position.x, position.y, size.width, size.height, null)
+        graphics.drawImage(topImage, topPosition.x, topPosition.y, size.width, size.height, null)
+        graphics.drawImage(bottomImage, bottomPosition.x, bottomPosition.y, size.width, size.height, null)
     }
 }

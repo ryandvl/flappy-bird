@@ -23,8 +23,9 @@ class TitleBar(private val game: Game, private val window: Window) : JPanel() {
         init {
             text = "Flappy Bird"
             horizontalAlignment = SwingConstants.LEFT
+            verticalAlignment = SwingConstants.CENTER
             foreground = TITLE_BAR_TEXT_COLOR
-            font = Font("Roboto-Bold", Font.BOLD, 14)
+            font = Font("bit5x3", Font.BOLD, 18)
         }
     }
 
@@ -41,7 +42,7 @@ class TitleBar(private val game: Game, private val window: Window) : JPanel() {
 
         init {
             this.addActionListener {
-                game.stop()
+                game.close()
             }
         }
     }

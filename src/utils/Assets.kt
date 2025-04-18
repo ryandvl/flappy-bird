@@ -19,22 +19,22 @@ open class Assets {
         }
 
     init {
-        loadImages(
+        val imagePaths = listOf(
             "images/background.png",
             "images/bird.png",
             "images/bottom_pipe.png",
             "images/top_pipe.png"
         )
+
+        for (imagePath in imagePaths) {
+            loadImage(imagePath)
+        }
+
+        registerFont("fonts/bit5x3.ttf")
     }
 
     fun getImage(name: String): BufferedImage? {
         return images[name]
-    }
-
-    fun loadImages(vararg imagePaths: String) {
-        for (imagePath in imagePaths) {
-            loadImage(imagePath)
-        }
     }
 
     fun loadImage(imagePath: String): BufferedImage {
@@ -59,11 +59,11 @@ open class Assets {
         return ImageIcon(scaledImage)
     }
 
-    fun registerFont(fontPath: String, size: Float = 16f) {
+    private fun registerFont(fontPath: String) {
         val fontFile = File("$assetsFolder/$fontPath")
 
         try {
-            val font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(size)
+            val font = Font.createFont(Font.TRUETYPE_FONT, fontFile)
             val graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment()
 
             graphicsEnvironment.registerFont(font)
