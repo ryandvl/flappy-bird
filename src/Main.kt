@@ -1,10 +1,10 @@
-import gfx.Window
+import game.Game
 import javax.swing.SwingUtilities.invokeLater
 
 fun main() {
     invokeLater {
-        val window = Window("Flappy Bird", 360, 640)
+        val game = Game()
 
-        println("Stopping process...")
+        game.start()
     }
 }
