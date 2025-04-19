@@ -6,7 +6,6 @@ import java.awt.Font
 import java.awt.GraphicsEnvironment
 import java.awt.Image
 import java.awt.image.BufferedImage
-import java.io.File
 import javax.imageio.ImageIO
 import javax.swing.ImageIcon
 
@@ -15,7 +14,7 @@ open class Assets {
 
     val assetsFolder: String
         get() {
-            return "./assets"
+            return "assets"
         }
 
     init {
@@ -38,16 +37,16 @@ open class Assets {
     }
 
     fun loadImage(imagePath: String): BufferedImage {
-        val file = File("$assetsFolder/$imagePath")
+        val javaUrl = javaClass.classLoader.getResource("$assetsFolder/$imagePath")
         val image: BufferedImage
 
         try {
-            image = ImageIO.read(file)
+            image = ImageIO.read(javaUrl)
         } catch (_: Exception) {
             throw ImageException(imagePath)
         }
 
-        val fileName: String = file.nameWithoutExtension
+        val fileName: String = imagePath.substringAfterLast("/").substringBeforeLast(".")
         images[fileName] = image
 
         return image
@@ -60,10 +59,10 @@ open class Assets {
     }
 
     private fun registerFont(fontPath: String) {
-        val fontFile = File("$assetsFolder/$fontPath")
+        val javaUrl = javaClass.classLoader.getResourceAsStream("$assetsFolder/$fontPath")
 
         try {
-            val font = Font.createFont(Font.TRUETYPE_FONT, fontFile)
+            val font = Font.createFont(Font.TRUETYPE_FONT, javaUrl)
             val graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment()
 
             graphicsEnvironment.registerFont(font)

@@ -1,11 +1,11 @@
 package game
 
 import BOARD_SIZE
+import dto.KeyDetector
 import dto.Vector2D
 import java.awt.event.KeyEvent
-import java.awt.event.KeyListener
 
-class Movement(private val game: Game, private val bird: Bird) : KeyListener {
+class Movement(private val game: Game, private val bird: Bird) : KeyDetector() {
     val velocity = Vector2D(-4, 0)
     private val gravity: Int = 1
 
@@ -56,11 +56,19 @@ class Movement(private val game: Game, private val bird: Bird) : KeyListener {
     override fun keyPressed(e: KeyEvent) {
         when (e.keyCode) {
             KeyEvent.VK_SPACE -> {
+                if (!bird.canJump) return
+
                 velocity.y = -9
+                bird.canJump = false
             }
         }
     }
 
-    override fun keyTyped(e: KeyEvent?) {}
-    override fun keyReleased(e: KeyEvent?) {}
+    override fun keyReleased(e: KeyEvent) {
+        when (e.keyCode) {
+            KeyEvent.VK_SPACE -> {
+                bird.canJump = true
+            }
+        }
+    }
 }

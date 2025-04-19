@@ -1,7 +1,7 @@
 package gfx
 
 import BACKGROUND_TRANSPARENT
-import BORDER_COLOR
+import TITLE_BAR_COLOR
 import game.Game
 import gfx.components.RoundedPanel
 import java.awt.BorderLayout
@@ -12,6 +12,8 @@ import javax.swing.JFrame
 import javax.swing.border.EmptyBorder
 
 class Window(private val game: Game, size: Dimension) : JFrame() {
+    val gamePanel: GamePanel
+
     val assets = game.assets
     var initialX: Int = 0
     var initialY: Int = 0
@@ -37,11 +39,12 @@ class Window(private val game: Game, size: Dimension) : JFrame() {
         contentPanel.border = EmptyBorder(borderSize, borderSize, borderSize, borderSize)
         contentPanel.layout = BorderLayout()
         contentPanel.setRoundAll(10)
-        contentPanel.background = BORDER_COLOR
+        contentPanel.background = TITLE_BAR_COLOR
         contentPane = contentPanel
 
         add(TitleBar(game, this), BorderLayout.NORTH)
-        add(GamePanel(game, this), BorderLayout.CENTER)
+        gamePanel = GamePanel(game, this)
+        add(gamePanel, BorderLayout.CENTER)
         pack()
 
         setLocationRelativeTo(null)
@@ -61,7 +64,5 @@ class Window(private val game: Game, size: Dimension) : JFrame() {
         for (pipe in game.pipes) {
             pipe.render(graphics)
         }
-
-        // Score
     }
 }

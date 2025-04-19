@@ -7,5 +7,5 @@ open class KeyDetector : KeyListener {
     override fun keyPressed(e: KeyEvent) {}
 
     override fun keyTyped(e: KeyEvent?) {}
-    override fun keyReleased(e: KeyEvent?) {}
+    override fun keyReleased(e: KeyEvent) {}
 }

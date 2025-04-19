@@ -20,7 +20,9 @@ class State(private val game: Game) {
                 graphics.color = Color(255, 100, 100)
                 graphics.font = Font("bit5x3", Font.BOLD, 36)
                 centerText(
-                    graphics, "Game Over", graphics.font, game.size,
+                    graphics2D = graphics,
+                    text = "Game Over",
+                    size = game.size,
                     offsetY = -250,
                     outline = true,
                     outlineThickness = 6
@@ -29,7 +31,9 @@ class State(private val game: Game) {
                 graphics.color = Color.YELLOW
                 graphics.font = Font("bit5x3", Font.BOLD, 24)
                 centerText(
-                    graphics, "Score: ${game.score}", graphics.font, game.size,
+                    graphics2D = graphics,
+                    text = "Score: ${game.score}",
+                    size = game.size,
                     offsetY = -180,
                     outline = true,
                     outlineThickness = 4
@@ -37,7 +41,9 @@ class State(private val game: Game) {
 
                 graphics.color = Color.WHITE
                 centerText(
-                    graphics, "Press any key to restart", graphics.font, game.size,
+                    graphics2D = graphics,
+                    text = "Press any key to restart",
+                    size = game.size,
                     offsetY = -120,
                     outline = true,
                     outlineThickness = 4
@@ -48,7 +54,9 @@ class State(private val game: Game) {
                 graphics.font = Font("bit5x3", Font.BOLD, 28)
                 graphics.color = Color.WHITE
                 centerText(
-                    graphics, "Press any key to start", graphics.font, game.size,
+                    graphics2D = graphics,
+                    text = "Press any key to start",
+                    size = game.size,
                     offsetY = -200,
                     outline = true,
                     outlineThickness = 4
@@ -60,10 +68,9 @@ class State(private val game: Game) {
                 graphics.color = Color.WHITE
 
                 centerText(
-                    graphics,
-                    game.score.toString(),
-                    graphics.font,
-                    game.size,
+                    graphics2D = graphics,
+                    text = game.score.toString(),
+                    size = game.size,
                     offsetY = -240,
                     outline = true,
                     outlineThickness = 4

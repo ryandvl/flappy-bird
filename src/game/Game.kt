@@ -10,18 +10,11 @@ import java.awt.Dimension
 import java.awt.Graphics
 import java.awt.Graphics2D
 import java.awt.RenderingHints
-import java.awt.event.ActionEvent
-import java.awt.event.ActionListener
 import java.awt.event.KeyEvent
 import java.util.*
 import javax.swing.Timer
 
-class Game : ActionListener {
-    private val loop: Timer = Timer(1000 / 60, this) // 1000 / 60 = 16.6 = 60 FPS
-    private val pipesLoop: Timer = Timer(1500) { // 1.5s
-        placePipes()
-    }
-
+class Game {
     val assets: Assets = Assets()
     var size: Dimension = BOARD_SIZE
     val window: Window = Window(this, size)
@@ -29,9 +22,13 @@ class Game : ActionListener {
     val pipes = ArrayList<Pipe>()
     val state = State(this)
     var score: Long = 0
-    val canPressKey: Boolean = false
 
-    val playKeyListener = PlayKeyListener()
+    private val playKeyListener = PlayKeyListener()
+
+    private val loop: Timer = Timer(1000 / 60, window.gamePanel) // 1000 / 60 = 16.6 = 60 FPS
+    private val pipesLoop: Timer = Timer(1500) { // 1.5s
+        placePipes()
+    }
 
     inner class PlayKeyListener : KeyDetector() {
         override fun keyPressed(e: KeyEvent) {
@@ -120,10 +117,5 @@ class Game : ActionListener {
 
         window.render(graphics)
         state.render(graphics)
-    }
-
-    override fun actionPerformed(e: ActionEvent?) {
-        bird.movement.move()
-        window.repaint()
     }
 }

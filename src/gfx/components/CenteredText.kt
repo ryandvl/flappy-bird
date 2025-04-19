@@ -2,13 +2,11 @@ package gfx
 
 import java.awt.Color
 import java.awt.Dimension
-import java.awt.Font
 import java.awt.Graphics2D
 
 fun centerText(
     graphics2D: Graphics2D,
     text: String,
-    font: Font,
     size: Dimension,
     offsetX: Int = 0,
     offsetY: Int = 0,

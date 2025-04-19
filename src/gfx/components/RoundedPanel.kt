@@ -10,22 +10,22 @@ import javax.swing.JPanel
 import kotlin.math.min
 
 open class RoundedPanel : JPanel() {
-    var roundTopLeft: Int = 0
+    private var roundTopLeft: Int = 0
         set(value) {
             field = value
             repaint()
         }
-    var roundTopRight: Int = 0
+    private var roundTopRight: Int = 0
         set(value) {
             field = value
             repaint()
         }
-    var roundBottomLeft: Int = 0
+    private var roundBottomLeft: Int = 0
         set(value) {
             field = value
             repaint()
         }
-    var roundBottomRight: Int = 0
+    private var roundBottomRight: Int = 0
         set(value) {
             field = value
             repaint()
@@ -43,10 +43,7 @@ open class RoundedPanel : JPanel() {
     }
 
     fun setRoundAll(radius: Int) {
-        roundTopLeft = radius
-        roundTopRight = radius
-        roundBottomLeft = radius
-        roundBottomRight = radius
+        setRound(radius, radius, radius, radius)
     }
 
     override fun paintComponent(g: Graphics?) {
