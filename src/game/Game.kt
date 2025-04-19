@@ -22,6 +22,8 @@ class Game {
     val pipes = ArrayList<Pipe>()
     val state = State(this)
     var score: Long = 0
+    var canRender: Boolean = false
+
 
     private val playKeyListener = PlayKeyListener()
 
