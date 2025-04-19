@@ -54,6 +54,8 @@ The `.jar` file is available on Releases.
 
 Or you can download the source code and build.
 
+> Make sure that the [assets folder](/assets/) is included in the final `.jar`.
+
 ---
 
 ## 🧑‍💻 Author
