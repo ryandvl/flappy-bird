@@ -4,6 +4,7 @@ import TITLE_BAR_COLOR
 import TITLE_BAR_TEXT_COLOR
 import game.Game
 import gfx.components.Button
+import utils.Assets
 import java.awt.BorderLayout
 import java.awt.Color
 import java.awt.Font
@@ -29,18 +30,22 @@ class TitleBar(private val game: Game, private val window: Window) : JPanel() {
         }
     }
 
-    private inner class MinimizeButton : Button(window, "images/icons/minimize.png") {
+    private inner class MinimizeButton : Button(window) {
         init {
+            this.icon = Assets.createImageIcon("assets/images/icons/minimize.png")
+
             this.addActionListener {
                 window.state = Frame.ICONIFIED
             }
         }
     }
 
-    private inner class CloseButton : Button(window, "images/icons/close.png") {
+    private inner class CloseButton : Button(window) {
         override val backgroundHoverColor: Color = Color(200, 100, 100)
 
         init {
+            this.icon = Assets.createImageIcon("assets/images/icons/close.png")
+
             this.addActionListener {
                 game.close()
             }

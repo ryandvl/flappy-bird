@@ -12,17 +12,20 @@ import java.awt.event.MouseEvent
 import javax.swing.ImageIcon
 import javax.swing.JButton
 
-abstract class Button(window: Window, imagePath: String, width: Int = 20, height: Int = 20) : JButton(
-    window.assets.resizeImageIcon(
-        ImageIcon("${window.assets.assetsFolder}/$imagePath"),
-        width,
-        height
-    )
+abstract class Button(window: Window, imagePath: String? = null, width: Int = 20, height: Int = 20) : JButton(
 ) {
     open val backgroundNormalColor: Color = BACKGROUND_TRANSPARENT
     open val backgroundHoverColor: Color = BUTTON_HOVER_COLOR
 
     init {
+        if (imagePath != null) {
+            icon = window.assets.resizeImageIcon(
+                ImageIcon("${window.assets.assetsFolder}/$imagePath"),
+                width,
+                height
+            )
+        }
+
         layout = FlowLayout(FlowLayout.CENTER, 0, 0)
 
         foreground = Color.WHITE

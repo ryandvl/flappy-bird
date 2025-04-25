@@ -17,6 +17,13 @@ open class Assets {
             return "assets"
         }
 
+    companion object {
+        fun createImageIcon(path: String): ImageIcon? {
+            val imageUrl = object {}::class.java.classLoader.getResource(path)
+            return imageUrl?.let { ImageIcon(it) }
+        }
+    }
+
     init {
         val imagePaths = listOf(
             "images/background.png",
